@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once("Bdd.php");
+require_once("bdd.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,9 +19,9 @@ require_once("Bdd.php");
         <div class="card" id="form_card_connection">
             <form method="POST" id="connection_form" enctype="multipart/form-data" onsubmit="return connection(event);">
                 <div class="row">
-                    <div class="col-12" id="mail">
-                        <label for="mail">Email :</label>
-                        <input type="email" name="mail" class="form-control" required>
+                    <div class="col-12" id="email">
+                        <label for="email">Email :</label>
+                        <input type="email" name="email" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">

@@ -39,7 +39,7 @@ require_once("Bdd.php");
         </div>
         <div class="row">
             <div class="col-12">
-                <button id="button_registration" onclick="window.location.href='registration.php'" type="button" class="btn btn-outline-primary">Créer votre compte Tchat</button>
+                <button id="button_registration" onclick="window.location.href='registration.php'" type="button" class="btn btn-outline-primary">Créer votre compte PassDoc</button>
             </div>
         </div>
     </div>

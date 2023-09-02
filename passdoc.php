@@ -93,8 +93,36 @@ $user = recup_table_users_by_id($id_user, $bdd);
                 </div>
             </div>
         </nav>
-        <div class="card" id="card_tool">
-            <div class="card-body">
+        <div class="col-8 offset-md-2">
+            <div class="card" id="card_tool">
+                <div class="card-body">
+                    <table class="table table-dark table-striped table_password">
+                        <thead>
+                            <th class="th_site">Sites</th>
+                            <th class="th_email">Emails</th>
+                            <th class="th_password">Passwords</th>
+                            <th class="th_copy"><img class="img_copy" src="./dist/img/icon/copy.png"></th>
+                            <th class="th_edit"><img class="img_edit" src="./dist/img/icon/edit.svg"></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_site">Google</td>
+                                <td><input type="text" class="form-control" value="AnthonyBastide@gmail.com"></td>
+                                <td><input type="text" id="input_password" class="form-control" value="sdsdsds755"></td>
+                                <td class="td_copy">
+                                    <button class="btn btn-outline-primary" onclick="copy_text()">
+                                        <img class="img_copy_button" src="./dist/img/icon/copy.png">
+                                    </button>
+                                </td>
+                                <td class="td_edit">
+                                    <button class="btn btn-outline-success">
+                                        <img class="img_edit_button" src="./dist/img/icon/edit.svg">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

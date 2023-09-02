@@ -1,15 +1,15 @@
 function registration(event){
     event.preventDefault();
-    var password = document.getElementById("password").value;
-    var password2 = document.getElementById("password2").value;
+    let password = document.getElementById("password").value;
+    let password2 = document.getElementById("password2").value;
     if(password == password2){
-        var formElem = document.getElementById("registration_form");
-        var formdata = new FormData(formElem);
-        var xhr = new XMLHttpRequest();
+        let formElem = document.getElementById("registration_form");
+        let formdata = new FormData(formElem);
+        let xhr = new XMLHttpRequest();
         xhr.open("POST", "include/js/registration.php");
         xhr.onload = function() {
             if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
+                let response = JSON.parse(xhr.responseText);
                 if(response.status === 'success'){
                     window.location.href = '/passdoc/index.php'; 
                 } 
@@ -37,15 +37,16 @@ function registration(event){
         alert("Erreur les deux mot-pass sont pas identique.");
     }
 }
+
 function connection(event){
     event.preventDefault();
-    var formElem = document.getElementById("connection_form");
-    var formdata = new FormData(formElem);
-    var xhr = new XMLHttpRequest();
+    let formElem = document.getElementById("connection_form");
+    let formdata = new FormData(formElem);
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", "include/js/connection.php");
     xhr.onload = function() {
         if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
+            let response = JSON.parse(xhr.responseText);
             if(response.status === 'success'){
                 window.location.href = '/passdoc/passdoc.php';
             } 
@@ -68,16 +69,17 @@ function connection(event){
     };
     xhr.send(formdata);
 }
+
 function update_profil(event){
     event.preventDefault();
-    var formElem = document.getElementById("update_profil");
-    var formdata = new FormData(formElem);
-    var xhr = new XMLHttpRequest();
+    let formElem = document.getElementById("update_profil");
+    let formdata = new FormData(formElem);
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", "include/js/update_profil.php");
     xhr.onload = function() {
         if (xhr.status === 200) {
             if(xhr.responseText.length > 0) {
-                var response = JSON.parse(xhr.responseText);
+                let response = JSON.parse(xhr.responseText);
                 switch (response.status) {
                     case 'error_extension':
                         document.getElementById("file_img").className = "form-control is-invalid";
@@ -102,4 +104,11 @@ function update_profil(event){
         }
     };
     xhr.send(formdata);
+}
+
+function copy_text() {
+    let val = document.getElementById("input_password").value;
+    navigator.clipboard.writeText(val).then(function() {
+        alert("Le mot de passe a été copié dans le presse-papier");
+    });
 }

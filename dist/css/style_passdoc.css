@@ -7,7 +7,7 @@ body {
     background: linear-gradient(45deg, #4b4b4b, #3e3e3e);
     background-size: cover;
     height: 100vh;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 #card_tool{
     margin-top: 10%;
@@ -35,4 +35,54 @@ body {
 }
 #input_file{
     margin-top: 3%;
+}
+.img_copy{
+    width: 22px;
+    height: 24px;
+}
+.img_edit{
+    width: 40px;
+    height: 30px;
+}
+.th_site{
+    vertical-align: middle;
+    text-align: center;
+}
+.th_email{
+    vertical-align: middle;
+}
+.th_password{
+    vertical-align: middle;
+}
+.th_edit{
+    text-align: center;
+    vertical-align: middle;
+}
+.th_copy{
+    text-align: center;
+    vertical-align: middle;
+}
+.td_edit{
+    text-align: center;
+    vertical-align: middle;
+}
+.td_copy{
+    text-align: center;
+    vertical-align: middle;
+}
+.td_site{
+    vertical-align: middle;
+    text-align: center;
+}
+.img_copy_button{
+    width: 22px;
+    height: 24px;
+}
+.img_edit_button{
+    width: 26px;
+    height: 26px;
+    vertical-align: middle;
+}
+.table_password{
+    margin-bottom: 0px;
 }

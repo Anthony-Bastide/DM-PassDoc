@@ -14,7 +14,16 @@ function registration(event){
                     window.location.href = '/passdoc/index.php'; 
                 } 
                 else {
-                    window.location.href = '/passdoc/known.php'; 
+                    const htmlCode = `
+                    <div class="tilte_alert"><img src="./dist/img/icon/warning.png" class="warning"></img>Un Problème est Survenu Soit :</div>
+                    - Impossible de trouver un compte correspondant à cette adresse e-mail
+                    <br>
+                    - Vous avez déjà un compte PassDoc
+                    <br>
+                    - Il a peut être un problème avec l'enregistrement de votre compte 
+                    `;
+        
+                    document.getElementById('card_alert').innerHTML = htmlCode; 
                 }
             }
             else {
@@ -38,10 +47,19 @@ function connection(event){
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
             if(response.status === 'success'){
-                window.location.href = '/passdoc/chat.php'; 
+                window.location.href = '/passdoc/passdoc.php';
             } 
             else {
-                window.location.href = '/passdoc/unknown.php'; 
+                const htmlCode = `
+                <div class="tilte_alert"><img src="./dist/img/icon/warning.png" class="warning"></img>Un Problème est Survenu Soit :</div>
+                - Impossible de trouver un compte correspondant à cette adresse e-mail
+                <br>
+                - Le mot de passe incorrect
+                <br>
+                - Vous n'avez pas de compte PassDoc 
+                `;
+    
+                document.getElementById('card_alert').innerHTML = htmlCode;
             }
         }
         else {

@@ -7,18 +7,27 @@ body {
     width: 25%;
     position: fixed;
     top: 15%; left: 37.5%;
-    background: linear-gradient(45deg, #ffffff, #ccd3f7);
+    background: linear-gradient(45deg, #4b4b4b, #3e3e3e);
     opacity: 0.8;
     
+}
+#card_alert{
+    width: 35%;
+    position: fixed;
+    top: 43%; left: 1%;
+    background: linear-gradient(45deg, #a11818, #a82a2a);
+    opacity: 0.7;
+    gap: 10px
 }
 #card-title{
     text-align: center;
     display: block;
     font-family: sans-serif;
     font-size: 2.5rem;
+    color: #0d6efd;
 }
 #form_card_registration{
-    background-color: #f4f6f9;
+    background-color: #4e4e4e;
     margin-top: 8%;
     box-shadow: 7px 5px 5px rgba(26, 26, 26, 0.878);
 }
@@ -52,4 +61,60 @@ body {
 }
 #identifier{
     margin-top: 5%;
+}
+#password_tilte{
+    color: #0d6efd;
+}
+#password2_tilte{
+    color: #0d6efd;
+}
+#email_tilte{
+    color: #0d6efd;
+}
+#name_tilte{
+    color: #0d6efd;
+}
+#surname_tilte{
+    color: #0d6efd;
+}
+#password{
+    background-color: #4e4e4e;
+    color: #0d6efd;
+    border: #0d6efd solid;
+    border-width: 1px;
+}
+#password2{
+    background-color: #4e4e4e;
+    color: #0d6efd;
+    border: #0d6efd solid;
+    border-width: 1px;
+}
+#email_text{
+    background-color: #4e4e4e;
+    color: #0d6efd;
+    border: #0d6efd solid;
+    border-width: 1px;
+}
+#surname_text{
+    background-color: #4e4e4e;
+    color: #0d6efd;
+    border: #0d6efd solid;
+    border-width: 1px;
+}
+#name_text{
+    background-color: #4e4e4e;
+    color: #0d6efd;
+    border: #0d6efd solid;
+    border-width: 1px;
+}
+.tilte_alert{
+    font-family: cursive;
+    color: #0e0d0e;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 2%;
+}
+.warning{
+    width: 6%;
+    margin-right: 1%;
 }

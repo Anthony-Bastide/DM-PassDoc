@@ -13,6 +13,10 @@ require_once("bdd.php");
     <title>Document</title>
 </head>
 <body>
+<div class="row">
+    <div class="card" id="card_alert">
+    </div>
+</div>
 <div class="card" id="card_connection">
     <div class="card-body">
         <span class="card-title" id="card-title">Connexion</span>
@@ -20,14 +24,14 @@ require_once("bdd.php");
             <form method="POST" id="connection_form" enctype="multipart/form-data" onsubmit="return connection(event);">
                 <div class="row">
                     <div class="col-12" id="email">
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label id="email_tilte" for="email">Email :</label>
+                        <input type="email" name="email" id="email_text" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12" id="pass">
-                        <label for="password">Mot de Passe :</label>
-                        <input type="password" name="password" class="form-control" required>
+                        <label id="password_tilte" for="password">Mot de Passe :</label>
+                        <input type="password" name="password" id="password_text" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">

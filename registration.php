@@ -12,6 +12,10 @@ require_once("bdd.php");
     <title>Document</title>
 </head>
 <body>
+<div class="row">
+    <div class="card" id="card_alert">
+    </div>
+</div>
 <div class="card" id="card_registration">
     <div class="card-body">
         <span class="card-title" id="card-title">Inscription</span>
@@ -19,29 +23,29 @@ require_once("bdd.php");
             <form method="POST" id="registration_form" enctype="multipart/form-data" onsubmit="return registration(event);">
                 <div class="row" id="identifier">
                     <div class="col-6" id="name">
-                        <label for="name">Nom :</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <label id="name_tilte" for="name">Nom :</label>
+                        <input type="text" name="name" id="name_text" class="form-control" required>
                     </div>
                     <div class="col-6" id="surname">
-                        <label for="surname">Prenom :</label>
-                        <input type="text" name="surname" class="form-control" required>
+                        <label id="surname_tilte" for="surname">Prenom :</label>
+                        <input type="text" name="surname" id="surname_text" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12" id="email">
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label id="email_tilte" for="email">Email :</label>
+                        <input type="email" name="email" id="email_text" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12" id="pass">
-                        <label for="password">Mot de Passe :</label>
+                        <label id="password_tilte" for="password">Mot de Passe :</label>
                         <input type="password" pattern="[a-z0-9]{6,16}" placeholder="Au Moins 6 Caractères" id="password" name="password" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12" id="pass">
-                        <label for="password2">Entrez le Mot de Passe à Nouveau :</label>
+                        <label id="password2_tilte" for="password2">Entrez le Mot de Passe à Nouveau :</label>
                         <input type="password" pattern="[a-z0-9]{6,16}" id="password2" name="password2" class="form-control" required>
                     </div>
                 </div>

@@ -40,13 +40,13 @@ require_once("bdd.php");
                 <div class="row">
                     <div class="col-12" id="pass">
                         <label id="password_tilte" for="password">Mot de Passe :</label>
-                        <input type="password" pattern="[a-z0-9]{6,16}" placeholder="Au Moins 6 Caractères" id="password" name="password" class="form-control" required>
+                        <input type="password" pattern="[a-zA-Z0-9!@#$%^&*()_+:;<>?~\\-]{6,16}" placeholder="Au Moins 6 Caractères" id="password" name="password" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12" id="pass">
                         <label id="password2_tilte" for="password2">Entrez le Mot de Passe à Nouveau :</label>
-                        <input type="password" pattern="[a-z0-9]{6,16}" id="password2" name="password2" class="form-control" required>
+                        <input type="password" pattern="[a-zA-Z0-9!@#$%^&*()_+:;<>?~\\-]{6,16}" id="password2" name="password2" class="form-control" required>
                     </div>
                 </div>
                 <div class="row">

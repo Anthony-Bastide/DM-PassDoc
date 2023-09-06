@@ -7,6 +7,7 @@ if(!is_connected($_SESSION['id'])){
 }
 $id_user = $_SESSION['id'];
 $user = recup_table_users_by_id($id_user, $bdd);
+$tab_password = recup_doc_pass($id_user, $bdd);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,38 +24,38 @@ $user = recup_table_users_by_id($id_user, $bdd);
     <div class="modal fade modal-lg " id="modify_profil" tabindex="-1" aria-labelledby="modify_profilLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modify_profilLabel">Modification du Profile</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modify_profilLabel">Modification du Profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" id="update_profil" enctype="multipart/form-data" onsubmit="return update_profil(event);">
+                    <div class="modal-body">
+                        <div class="row" id="name_surname_profil">
+                            <div class="col-6" id="name">
+                                <label for="name">Nom :</label>
+                                <input type="text" name="name" value="<?= $user['name'] ?>" class="form-control" required>
+                            </div>
+                            <div class="col-6" id="surname">
+                                <label for="surname">Prenom :</label>
+                                <input type="text" name="surname" value="<?= $user['surname'] ?>" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row" id="file_profil">
+                            <div class="col-9" id="input_file">
+                                <label for="file_img" class="form-label">Nouvelle Image de Profil :</label>
+                                <input class="form-control" title="Le fichier doit être une image (jpg, jpeg, png)" id="file_img" name="file_img" type="file">
+                            </div>
+                            <div class="col-3">
+                                <img class="img_profile" src="./dist/img/profile/<?php if($user['img']!=""){echo $user['img'];}else{echo 'profile.png';} ?>">
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" value="<?= $id_user ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Sauvegarder les Modifications</button>
+                    </div>
+                </form>
             </div>
-            <form method="POST" id="update_profil" enctype="multipart/form-data" onsubmit="return update_profil(event);">
-                <div class="modal-body">
-                    <div class="row" id="name_surname_profil">
-                        <div class="col-6" id="name">
-                            <label for="name">Nom :</label>
-                            <input type="text" name="name" value="<?= $user['name'] ?>" class="form-control" required>
-                        </div>
-                        <div class="col-6" id="surname">
-                            <label for="surname">Prenom :</label>
-                            <input type="text" name="surname" value="<?= $user['surname'] ?>" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="row" id="file_profil">
-                        <div class="col-9" id="input_file">
-                            <label for="file_img" class="form-label">Nouvelle Image de Profil :</label>
-                            <input class="form-control" title="Le fichier doit être une image (jpg, jpeg, png)" id="file_img" name="file_img" type="file">
-                        </div>
-                        <div class="col-3">
-                            <img class="img_profile" src="./dist/img/profile/<?php if($user['img']!=""){echo $user['img'];}else{echo 'profile.png';} ?>">
-                        </div>
-                    </div>
-                    <input type="hidden" name="id" value="<?= $id_user ?>">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Sauvegarder les Modifications</button>
-                </div>
-                </div>
-            </form>
         </div>
     </div>
     <div class="col-8 offset-md-2" id="body_tool">
@@ -78,8 +79,8 @@ $user = recup_table_users_by_id($id_user, $bdd);
                                 Option
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Voir les Mots de Passe</a></li>
-                                <li><a class="dropdown-item" href="#">Ajouter un Mot de Passe</a></li>
+                                <li><a class="dropdown-item" onclick="display_see_password()">Voir les Mots de Passe</a></li>
+                                <li><a class="dropdown-item" onclick="display_add_password()">Ajouter un Mot de Passe</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -95,7 +96,7 @@ $user = recup_table_users_by_id($id_user, $bdd);
         </nav>
         <div class="col-8 offset-md-2">
             <div class="card" id="card_tool">
-                <div class="card-body">
+                <div class="card-body" id="card_display_tool">
                     <table class="table table-dark table-striped table_password">
                         <thead>
                             <th class="th_site">Sites</th>
@@ -105,21 +106,29 @@ $user = recup_table_users_by_id($id_user, $bdd);
                             <th class="th_edit"><img class="img_edit" src="./dist/img/icon/edit.svg"></th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="td_site">Google</td>
-                                <td><input type="text" class="form-control" value="AnthonyBastide@gmail.com"></td>
-                                <td><input type="text" id="input_password" class="form-control" value="sdsdsds755"></td>
-                                <td class="td_copy">
-                                    <button class="btn btn-outline-primary" onclick="copy_text()">
-                                        <img class="img_copy_button" src="./dist/img/icon/copy.png">
-                                    </button>
-                                </td>
-                                <td class="td_edit">
-                                    <button class="btn btn-outline-success">
-                                        <img class="img_edit_button" src="./dist/img/icon/edit.svg">
-                                    </button>
-                                </td>
-                            </tr>
+                            <?php
+                            foreach ($tab_password as $password) 
+                            {
+                                $password2 = decryptPassword($password['password'], $id_user , $bdd);
+                                ?>
+                                <tr>
+                                    <td class="td_site"><?= $password['website'] ?></td>
+                                    <td><input type="text" class="form-control" value="<?= $password['email'] ?>"></td>
+                                    <td><input type="text" id="input_password" class="form-control" value="<?= $password2 ?>"></td>
+                                    <td class="td_copy">
+                                        <button class="btn btn-outline-primary" onclick="copy_text()">
+                                            <img class="img_copy_button" src="./dist/img/icon/copy.png">
+                                        </button>
+                                    </td>
+                                    <td class="td_edit">
+                                        <button class="btn btn-outline-success">
+                                            <img class="img_edit_button" src="./dist/img/icon/edit.svg">
+                                        </button>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

@@ -45,7 +45,7 @@ function connection(event){
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "include/js/connection.php");
     xhr.onload = function() {
-        if (xhr.status === 200) {
+        if(xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
             if(response.status === 'success'){
                 window.location.href = '/passdoc/passdoc.php';
@@ -77,10 +77,10 @@ function update_profil(event){
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "include/js/update_profil.php");
     xhr.onload = function() {
-        if (xhr.status === 200) {
+        if(xhr.status === 200) {
             if(xhr.responseText.length > 0) {
                 let response = JSON.parse(xhr.responseText);
-                switch (response.status) {
+                switch(response.status) {
                     case 'error_extension':
                         document.getElementById("file_img").className = "form-control is-invalid";
                         alert("Erreur : Veuillez ne mettre que des images");
@@ -111,4 +111,80 @@ function copy_text() {
     navigator.clipboard.writeText(val).then(function() {
         alert("Le mot de passe a été copié dans le presse-papier");
     });
+}
+
+function generate_password() {
+    const longueurMotDePasse = 13;
+    const majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minuscules = "abcdefghijklmnopqrstuvwxyz";
+    const chiffres = "0123456789";
+    const symboles = "!@#$%&*()_+";
+    let caractereAleatoire = "";
+    
+    while(caractereAleatoire.length < longueurMotDePasse) {
+        caractereAleatoire +=  
+            majuscules.charAt(Math.floor(Math.random() * majuscules.length)) +
+            minuscules.charAt(Math.floor(Math.random() * minuscules.length)) +
+            chiffres.charAt(Math.floor(Math.random() * chiffres.length)) +
+            symboles.charAt(Math.floor(Math.random() * symboles.length));;
+    }
+
+    const lettres = caractereAleatoire.split('');
+
+    for (let i = lettres.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [lettres[i], lettres[j]] = [lettres[j], lettres[i]]; // Échanger les lettres
+    }
+
+    const password = lettres.join('');
+
+    document.getElementById("add_password").value = password;
+}
+function add_password_doc(event){
+    event.preventDefault();
+    let formElem = document.getElementById("from_add_password");
+    let formdata = new FormData(formElem);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "include/js/add_password.php");
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+            if(response.status === 'success'){
+                window.location.href = '/passdoc/passdoc.php';
+            } 
+            else {
+                alert("C'est information son déjà enregistrer");
+            }
+        }
+        else {
+            alert("Erreur lors de l'envoi de la requête.");
+        }
+    };
+    xhr.send(formdata);
+}
+
+function display_add_password() {
+    var selected_value = document.getElementById("card_display_tool").value;
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("card_display_tool").innerHTML = xhr.responseText;
+        }
+    };
+    xhr.open("POST", "include/js/display_add_password.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("group=" + selected_value);
+}
+
+function display_see_password() {
+    var selected_value = document.getElementById("card_display_tool").value;
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("card_display_tool").innerHTML = xhr.responseText;
+        }
+    };
+    xhr.open("POST", "include/js/display_see_password.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("group=" + selected_value);
 }

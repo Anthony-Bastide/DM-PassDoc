@@ -18,6 +18,25 @@ if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['passwo
         $sqlQuery = "INSERT INTO users (email, password, name, surname) VALUES(:email, SHA1(:password), :name, :surname)";
         $stmt = $bdd->prepare($sqlQuery);
         $stmt->execute(array(":email"=>$email,":password"=>$password, ":name"=>$name, ":surname"=>$surname));
+
+        $sqlQuery = "SELECT id FROM users WHERE email = :email AND name = :name AND surname = :surname";
+        $stmt = $bdd->prepare($sqlQuery);
+        $stmt->execute(array(":email"=>$email , ":name"=>$name, ":surname"=>$surname));
+
+        $tab_id_user = $stmt->fetch();
+        $id_user = $tab_id_user['id'];
+
+        $lettres = 'abcdefghijklmnopqrstuvwxyz';
+        $cript = '';
+        for ($i = 0; $i < 6; $i++) {
+            $index = rand(0, strlen($lettres) - 1);
+            $cript .= $lettres[$index];
+        }
+
+        $sqlQuery = "INSERT INTO keyscript (id_user, cript) VALUES(:id_user, :cript)";
+        $stmt = $bdd->prepare($sqlQuery);
+        $stmt->execute(array(":id_user"=>$id_user,":cript"=>$cript));
+
         echo json_encode(array('status' => 'success')); // Retourne une réponse JSON en cas de succès
     }
     else {

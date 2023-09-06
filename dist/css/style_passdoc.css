@@ -86,3 +86,15 @@ body {
 .table_password{
     margin-bottom: 0px;
 }
+.btn_add_password{
+    margin: 5%;
+}
+.input_text_blue{
+    color: #0d6efd;
+    border: #0d6efd solid;
+    border-width: 1px;
+}
+.text_add_password{
+    color: #0d6efd;
+    text-align: center;
+}

@@ -133,7 +133,7 @@ function generate_password() {
 
     for (let i = lettres.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [lettres[i], lettres[j]] = [lettres[j], lettres[i]]; // Échanger les lettres
+        [lettres[i], lettres[j]] = [lettres[j], lettres[i]]; 
     }
 
     const password = lettres.join('');
@@ -164,7 +164,6 @@ function add_password_doc(event){
 }
 
 function display_add_password() {
-    var selected_value = document.getElementById("card_display_tool").value;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -173,11 +172,10 @@ function display_add_password() {
     };
     xhr.open("POST", "include/js/display_add_password.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("group=" + selected_value);
+    xhr.send("");
 }
 
 function display_see_password() {
-    var selected_value = document.getElementById("card_display_tool").value;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -186,5 +184,18 @@ function display_see_password() {
     };
     xhr.open("POST", "include/js/display_see_password.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("group=" + selected_value);
+    xhr.send("");
+}
+
+function display_see_password_search() {
+    var selected_value = document.getElementById("pass_search").value;
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("card_display_tool").innerHTML = xhr.responseText;
+        }
+    };
+    xhr.open("POST", "include/js/display_see_password_search.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("search=" + selected_value);
 }

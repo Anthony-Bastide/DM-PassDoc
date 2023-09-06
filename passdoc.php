@@ -3,7 +3,7 @@ session_start();
 require_once("bdd.php");
 require_once("./include/function.php");
 if(!is_connected($_SESSION['id'])){
-    header('Location:prohibition.php');
+    header('Location:index.php');
 }
 $id_user = $_SESSION['id'];
 $user = recup_table_users_by_id($id_user, $bdd);
@@ -88,8 +88,8 @@ $tab_password = recup_doc_pass($id_user, $bdd);
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="form-control me-2" type="search" id="pass_search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="button" onclick="display_see_password_search()">Search</button>
                     </form>
                 </div>
             </div>

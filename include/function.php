@@ -36,6 +36,19 @@ function recup_doc_pass($id_user, $bdd)
     return $tab_password;
 }
 
+function recup_doc_pass_for_search($search ,$id_user, $bdd)
+{
+    $tab_password = array();
+
+    $sqlQuery = "SELECT * FROM password WHERE id_user = :id_user AND (email LIKE :email OR website LIKE :website)";
+    $stmt = $bdd->prepare($sqlQuery);
+    $stmt->execute(array(":id_user"=>$id_user, ":email"=>"%".$search."%", ":website"=>"%".$search."%"));
+
+    $tab_password = $stmt->fetchAll();
+    
+    return $tab_password;
+}
+
 function encryptPassword($password, $id_user, $bdd) {
 
     $sqlQuery = "SELECT cript FROM keyscript WHERE id_user = :id_user";

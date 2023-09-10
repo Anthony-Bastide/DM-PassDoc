@@ -12,9 +12,9 @@ if(isset($_POST['add_site']) and isset($_POST['add_email']) and isset($_POST['ad
 
     $password = encryptPassword($password, $id_user, $bdd);
 
-    $sqlQuery = "SELECT * FROM password WHERE email = :email AND password = :password and website = :website AND id_user = :id_user";
+    $sqlQuery = "SELECT * FROM password WHERE email = :email and website = :website AND id_user = :id_user";
     $stmt = $bdd->prepare($sqlQuery);
-    $stmt->execute(array(":email"=>$email,":password"=>$password,":website"=>$website,":id_user"=>$id_user));
+    $stmt->execute(array(":email"=>$email,":website"=>$website,":id_user"=>$id_user));
 
     $rows = $stmt->fetchAll();
 

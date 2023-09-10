@@ -44,6 +44,14 @@ body {
     width: 40px;
     height: 30px;
 }
+.img_back{
+    width: 19px;
+    height: 22px;
+}
+.img_delete{
+    width: 20px;
+    height: 26px;
+}
 .th_site{
     vertical-align: middle;
     text-align: center;
@@ -83,6 +91,11 @@ body {
     height: 26px;
     vertical-align: middle;
 }
+.img_delete_button{
+    width: 18px;
+    height: 25px;
+    vertical-align: middle;
+}
 .table_password{
     margin-bottom: 0px;
 }
@@ -97,4 +110,21 @@ body {
 .text_add_password{
     color: #0d6efd;
     text-align: center;
+}
+.edit_button{
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.copy_button{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.back_button{
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+.td_input{
+    vertical-align: middle;
 }

@@ -150,7 +150,7 @@ function add_password_doc(event){
         if(xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
             if(response.status === 'success'){
-                window.location.href = '/passdoc/passdoc.php';
+                display_see_password();
             } 
             else {
                 alert("C'est information son déjà enregistrer");
@@ -198,4 +198,54 @@ function display_see_password_search() {
     xhr.open("POST", "include/js/display_see_password_search.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send("search=" + selected_value);
+    document.getElementById("search_ok").value = "1";
 }
+
+function delet_password(id) {
+    if(confirm("Est te vous sur de vouloir supprimer votre mot de passe")) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "include/js/delet_password.php");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    display_see_password();
+                } else {
+                    alert("Il y a eu une erreur lors de la suppression de votre mot de passe.");
+                }
+            } else {
+                console.error("Erreur lors de l'envoi de la requête.");
+            }
+        };
+        xhr.send("id=" + id);
+    }
+}
+
+function dispay_edit(id) {
+    document.getElementById("img_copy_button"+ id).className = "img_edit";
+    document.getElementById("img_copy_button"+ id).src = "./dist/img/icon/edit.svg";
+    document.getElementById("copy_button"+ id).className = "btn btn-outline-success edit_button";
+    document.getElementById("delete_button"+ id).setAttribute("onclick", "edit_password()");
+
+    document.getElementById("img_delete_button"+ id).className = "img_back";
+    document.getElementById("img_delete_button"+ id).src = "./dist/img/icon/back.png";
+    document.getElementById("delete_button"+ id).className = "btn btn-outline-danger back_button";
+    document.getElementById("delete_button"+ id).setAttribute("onclick", "return_view()");
+}
+
+function return_view() {
+    const search =document.getElementById("search_ok").value;
+    if(search != "0") {
+        display_see_password_search();
+    } else {
+        display_see_password();
+    }
+}
+
+function display_see_password_search_event(event) {
+    const input = event.target;
+    if (event.keyCode === 13) {
+        display_see_password_search();
+    }
+  }

@@ -27,7 +27,7 @@ function recup_doc_pass($id_user, $bdd)
 {
     $tab_password = array();
 
-    $sqlQuery = "SELECT * FROM password WHERE id_user = :id_user";
+    $sqlQuery = "SELECT * FROM password WHERE id_user = :id_user ORDER BY id DESC";
     $stmt = $bdd->prepare($sqlQuery);
     $stmt->execute(array(":id_user"=>$id_user));
 

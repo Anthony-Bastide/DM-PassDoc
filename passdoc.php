@@ -87,10 +87,10 @@ $tab_password = recup_doc_pass($id_user, $bdd);
                             <a class="nav-link" href="disconect.php">Déconnexion</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" id="pass_search" placeholder="Search" aria-label="Search">
+                    <div class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" id="pass_search" onkeyup="display_see_password_search_event(event)" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="button" onclick="display_see_password_search()">Search</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -103,7 +103,7 @@ $tab_password = recup_doc_pass($id_user, $bdd);
                             <th class="th_email">Emails</th>
                             <th class="th_password">Passwords</th>
                             <th class="th_copy"><img class="img_copy" src="./dist/img/icon/copy.png"></th>
-                            <th class="th_edit"><img class="img_edit" src="./dist/img/icon/edit.svg"></th>
+                            <th class="th_edit"><img class="img_delete" src="./dist/img/icon/delete.png"></th>
                         </thead>
                         <tbody>
                             <?php
@@ -113,16 +113,16 @@ $tab_password = recup_doc_pass($id_user, $bdd);
                                 ?>
                                 <tr>
                                     <td class="td_site"><?= $password['website'] ?></td>
-                                    <td><input type="text" class="form-control" value="<?= $password['email'] ?>"></td>
-                                    <td><input type="text" id="input_password" class="form-control" value="<?= $password2 ?>"></td>
+                                    <td class="td_input"><input type="text" class="form-control" onkeyup="dispay_edit('<?= $password['id'] ?>')" value="<?= $password['email'] ?>"></td>
+                                    <td class="td_input"><input type="text" id="input_password" onkeyup="dispay_edit('<?= $password['id'] ?>')" class="form-control" value="<?= $password2 ?>"></td>
                                     <td class="td_copy">
-                                        <button class="btn btn-outline-primary" onclick="copy_text()">
-                                            <img class="img_copy_button" src="./dist/img/icon/copy.png">
+                                        <button id="copy_button<?= $password['id'] ?>" class="btn btn-outline-primary copy_button" onclick="copy_text()">
+                                            <img id="img_copy_button<?= $password['id'] ?>" class="img_copy_button" src="./dist/img/icon/copy.png">
                                         </button>
                                     </td>
                                     <td class="td_edit">
-                                        <button class="btn btn-outline-success">
-                                            <img class="img_edit_button" src="./dist/img/icon/edit.svg">
+                                        <button id="delete_button<?= $password['id'] ?>" class="btn btn-outline-danger" onclick="delet_password('<?= $password['id'] ?>')">
+                                            <img id="img_delete_button<?= $password['id'] ?>" class="img_delete_button" src="./dist/img/icon/delete.png">
                                         </button>
                                     </td>
                                 </tr>
@@ -132,6 +132,7 @@ $tab_password = recup_doc_pass($id_user, $bdd);
                         </tbody>
                     </table>
                 </div>
+                <input type="hidden" id="search_ok">
             </div>
         </div>
     </div>

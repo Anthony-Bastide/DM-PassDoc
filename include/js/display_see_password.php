@@ -21,10 +21,10 @@ $tab_password = recup_doc_pass($id_user, $bdd);
             ?>
             <tr>
                 <td class="td_site"><?= $password['website'] ?></td>
-                <td class="td_input"><input type="text" class="form-control" onkeyup="dispay_edit('<?= $password['id'] ?>')" value="<?= $password['email'] ?>"></td>
-                <td class="td_input"><input type="text" id="input_password" onkeyup="dispay_edit('<?= $password['id'] ?>')" class="form-control" value="<?= $password2 ?>"></td>
+                <td class="td_input"><input type="text" id="input_email<?= $password['id'] ?>" class="form-control" onkeyup="dispay_edit('<?= $password['id'] ?>')" value="<?= $password['email'] ?>"></td>
+                <td class="td_input"><input type="text" id="input_password<?= $password['id'] ?>" onkeyup="dispay_edit('<?= $password['id'] ?>')" class="form-control" value="<?= $password2 ?>"></td>
                 <td class="td_copy">
-                    <button id="copy_button<?= $password['id'] ?>" class="btn btn-outline-primary copy_button" onclick="copy_text()">
+                    <button id="copy_button<?= $password['id'] ?>" class="btn btn-outline-primary copy_button" onclick="copy_text('<?= $password['id'] ?>')">
                         <img id="img_copy_button<?= $password['id'] ?>" class="img_copy_button" src="./dist/img/icon/copy.png">
                     </button>
                 </td>

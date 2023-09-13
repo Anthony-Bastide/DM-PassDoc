@@ -19,11 +19,11 @@ $tab_password = recup_doc_pass($id_user, $bdd);
     <link rel="stylesheet" href="./dist/css/style_passdoc.css">
     <title>Document</title>
 </head>
-<body>
+<body onload="display_see_password()">
 
     <div class="modal fade modal-lg " id="modify_profil" tabindex="-1" aria-labelledby="modify_profilLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal_profile modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modify_profilLabel">Modification du Profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -33,11 +33,11 @@ $tab_password = recup_doc_pass($id_user, $bdd);
                         <div class="row" id="name_surname_profil">
                             <div class="col-6" id="name">
                                 <label for="name">Nom :</label>
-                                <input type="text" name="name" value="<?= $user['name'] ?>" class="form-control" required>
+                                <input type="text" name="name" id="name" value="<?= $user['name'] ?>" class="form-control" required>
                             </div>
                             <div class="col-6" id="surname">
                                 <label for="surname">Prenom :</label>
-                                <input type="text" name="surname" value="<?= $user['surname'] ?>" class="form-control" required>
+                                <input type="text" name="surname" id="surname" value="<?= $user['surname'] ?>" class="form-control" required>
                             </div>
                         </div>
                         <div class="row" id="file_profil">
@@ -96,43 +96,10 @@ $tab_password = recup_doc_pass($id_user, $bdd);
         </nav>
         <div class="col-8 offset-md-2">
             <div class="card" id="card_tool">
-                <div class="card-body" id="card_display_tool">
-                    <table class="table table-dark table-striped table_password">
-                        <thead>
-                            <th class="th_site">Sites</th>
-                            <th class="th_email">Emails</th>
-                            <th class="th_password">Passwords</th>
-                            <th class="th_copy"><img class="img_copy" src="./dist/img/icon/copy.png"></th>
-                            <th class="th_edit"><img class="img_delete" src="./dist/img/icon/delete.png"></th>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($tab_password as $password) 
-                            {
-                                $password2 = decryptPassword($password['password'], $id_user , $bdd);
-                                ?>
-                                <tr>
-                                    <td class="td_site"><?= $password['website'] ?></td>
-                                    <td class="td_input"><input type="text" class="form-control" onkeyup="dispay_edit('<?= $password['id'] ?>')" value="<?= $password['email'] ?>"></td>
-                                    <td class="td_input"><input type="text" id="input_password" onkeyup="dispay_edit('<?= $password['id'] ?>')" class="form-control" value="<?= $password2 ?>"></td>
-                                    <td class="td_copy">
-                                        <button id="copy_button<?= $password['id'] ?>" class="btn btn-outline-primary copy_button" onclick="copy_text()">
-                                            <img id="img_copy_button<?= $password['id'] ?>" class="img_copy_button" src="./dist/img/icon/copy.png">
-                                        </button>
-                                    </td>
-                                    <td class="td_edit">
-                                        <button id="delete_button<?= $password['id'] ?>" class="btn btn-outline-danger" onclick="delet_password('<?= $password['id'] ?>')">
-                                            <img id="img_delete_button<?= $password['id'] ?>" class="img_delete_button" src="./dist/img/icon/delete.png">
-                                        </button>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                <div class="card-body" id="card_display_tool" >
                 </div>
                 <input type="hidden" id="search_ok">
+                <input type="hidden" id="size_tab_paswword" value="<?= count($tab_password) ?>">
             </div>
         </div>
     </div>
